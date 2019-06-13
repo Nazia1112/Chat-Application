@@ -1,0 +1,40 @@
+<div class="container" style="padding:3vw 25vw 3vw 25vw;" id="cont">
+    <div>
+        <form [formGroup]="userRegistrationForm">
+            <h2 class="text-center"> Register </h2>
+
+            <div class="alert alert-danger" *ngIf="registrationError">
+                {{registrationError}}
+            </div>
+
+            <div class="form-group">
+                <label class="control-label " for="name">
+                    <h5>Username:</h5>
+                </label>
+                <div>
+                    <input class="form-control" type="text" formControlName="name" placeholder="username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">
+                    <h5>Password:</h5>
+                </label>
+                <div>
+                    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter password" name="pwd"
+                        required>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="!userRegistrationForm.valid" (click)="registerUser()"
+                    style="background-color: lawngreen">Register Now</button>
+            </div>
+        </form>
+        <div class="text-center">Already have an account?
+            <a href="#">Log in</a>
+        </div>
+    </div>
+
+</div>

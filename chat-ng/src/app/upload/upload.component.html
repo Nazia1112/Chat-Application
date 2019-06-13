@@ -1,0 +1,19 @@
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  input <input type="file" (change)="onFileChange($event)" multiple="multiple" accept="image/*"/>
+  <button type="submit">Send</button>
+</form>
+
+<div> 
+  
+ <div *ngFor="let item of processedImages">
+   <!-- <img src="{{item.imageDataUrl}}" height="200" width="300"> -->
+   <img src="{{item.imageDataUrl}}">
+
+ </div>
+
+ <b *ngIf="showTitle" >Compressed Image List</b>
+ <div *ngFor="let item of processedImages">
+   <!-- <img src="{{item.compressedImage.imageDataUrl}}" height="200" width="300"> -->
+   <img src="{{item.compressedImage.imageDataUrl}}">
+ </div> 
+</div>

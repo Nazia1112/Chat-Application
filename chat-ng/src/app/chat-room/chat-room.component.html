@@ -1,0 +1,75 @@
+<div class="container" (click)="markRead()">
+    <div class="row">
+        <div class="col-sm-3 col-md-6">
+            <h2>{{ userNameTo }}
+                <span *ngIf="userStatus" class="dot" style="background-color:greenyellow;"> </span>
+                <span *ngIf="!userStatus" class="dot" style="background-color:rgb(91, 97, 91);"> </span>
+            </h2>
+        </div>
+        <div class="col-sm-3 col-md-6">
+            <div class="card">
+                <br>
+                <div *ngFor="let msg of messageArray; let  i = index">
+
+                    <div *ngIf="msg.userNameFrom==userName;else other" id="currentuser">
+                        <div class="msg" id="font1">{{ msg.message }} 
+                            <h6 *ngIf="msg.userNameFrom==userName;else other">{{msg.createdAt | date:'medium'}}</h6>
+
+                            <div *ngIf="msg.messageType=='image'">
+                                <img class="msg" id="myImg" [src]="msg.image" alt="Snow" style="width:100%;max-width:100px" (click)="preview()">
+
+                                <div id="myModal" class="modal">
+
+                                    <span class="close">&times;</span>
+                                    <img class="modal-content" id="img01" [src]="msg.image">
+                                    <div id="caption"></div>
+                                </div>
+                            </div>
+
+                            <span *ngIf="msg.messageStatus.status=='sent'">
+                                <i class='far fa-circle'></i>
+                            </span>
+                            <span *ngIf="msg.messageStatus.status=='delivered'">
+                                <i class='far fa-check-circle'></i>
+                            </span>
+                            <span *ngIf="msg.messageStatus.status=='read'">
+                                <i class='fas fa-check-circle' style='color:indigo'></i>
+                            </span>
+                            <hr>
+                        </div>
+                        <!-- <div>{{msg.messageStatus.status}}  {{msg.messageStatus.time | date:'medium'}}</div> -->
+                    </div>
+                    <ng-template #other>
+                        <div id="otheruser">
+
+                            <div *ngIf="msg.messageType=='image'">
+                                <img id="myImg" [src]="msg.image" alt="Snow" style="width:100%;max-width:100px">
+                            </div>
+                            <p class="msg" id="font2">{{ msg.message }}</p>
+                            <h6>{{msg.createdAt | date:'medium'}}</h6>
+                            <hr>
+                            <!-- <span class="user">~{{msg.userNameFrom}}</span>           -->
+                        </div>
+                    </ng-template>
+                </div>
+                <p *ngIf="isTyping" class="isTyping">{{userNameTo}} is typing...</p>
+                <br>
+                <div class="msgBox">
+                    <textarea (keypress)="typing()" [(ngModel)]="message" name="message" type="text" placeholder="Type your message" style="width:80%; border-radius: 5px;"> </textarea>
+                    <button type="button" class="btn btn-dark btn-lg" (click)="uploadMedia()">
+                        <span>
+                            <i class="fa fa-image"></i>
+                        </span>
+                    </button>
+
+                    <button type="button" class="btn btn-dark btn-lg" (click)="sendMessage('text')" style="float: right;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+
+
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
